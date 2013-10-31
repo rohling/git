@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="cokieutil.js"></script> // Objeto CookieUtil
+<script>
+function salvarCookie(name) {
+	var valor = document.forms['cookieform'].cookievalue.value;
+	var itemStorage = sessionStorage.setItem('dataStorage', valor);
+	var valorItemStorage = sessionStorage.getItem('dataStorage');
+	if (!valor)
+		alert('Entre um valor para o cookie e dado.');
+	else {
+		CookieUtil.set(name,valor);
+		var mensagem = 'Um cookie denominado "meuCookie" com o valor '+valor+'\n';
+		mensagem += 'e um dado com o nome "dataStorage" com o valor '+valorItemStorage+'\n';
+		mensagem += 'foram criados'
+		alert(mensagem);
+	}
+}
+function lerCookie(name) {
+	var valorItemStorage = sessionStorage.getItem('dataStorage');
+	var mensagem = 'Um cookie denominado "meuCookie" com o valor '+CookieUtil.get(name)+'\n';
+	mensagem += 'e um dado com o nome "dataStorage" com o valor '+valorItemStorage+'\n';
+	mensagem += 'foram lidos'
+	alert(mensagem);
+}
+function apagarCookie(name) {
+	CookieUtil.unset(name);
+	sessionStorage.removeItem('dataStorage');
+	alert('Cookie com o nome "meuCookie" e dado com o nome "dataStorage" foram apagados');
+}
+</script>
+</head>
+<body>
+	<section>	
+<form name="cookieform" action="#"><p>
+<label>Escolha um valor para o cookie de nome "meuCookie".<br>O mesmo valor será usado para o dado de nome "dataStorage":</label><br> <input name="cookievalue">
+</p>
+</form>
+<p><a href="#" onclick="salvarCookie('meuCookie')">Armazenar cookie e dado</a></p>
+<p><a href="#" onclick="lerCookie('meuCookie')">Ler cookie e dado</a></p>
+<p><a href="#" onclick="apagarCookie('meuCookie')">Apagar cookie e dado</a></p>
+</section>
+</body>
+</html>
